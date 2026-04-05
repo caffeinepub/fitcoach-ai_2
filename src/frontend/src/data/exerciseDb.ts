@@ -23,6 +23,8 @@ export type Equipment =
 
 export type Difficulty = "beginner" | "intermediate" | "advanced";
 
+const FALLBACK_TUTORIAL = "https://www.youtube.com/embed/dQw4w9WgXcQ";
+
 export interface ExerciseInfo {
   id: string;
   name: string;
@@ -36,6 +38,7 @@ export interface ExerciseInfo {
   restSeconds: number;
   isCompound: boolean;
   tags: string[];
+  tutorialUrl: string;
 }
 
 export const EXERCISES: ExerciseInfo[] = [
@@ -54,6 +57,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["push", "upper"],
+    tutorialUrl: "https://www.youtube.com/embed/IODxDxX7oi4",
   },
   {
     id: "dumbbell-bench-press",
@@ -68,6 +72,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["push", "upper", "bench"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "barbell-bench-press",
@@ -82,6 +87,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 120,
     isCompound: true,
     tags: ["push", "upper", "bench", "strength"],
+    tutorialUrl: "https://www.youtube.com/embed/SCVCLChPQFY",
   },
   {
     id: "incline-dumbbell-press",
@@ -96,6 +102,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["push", "upper", "upper-chest"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "chest-fly",
@@ -111,6 +118,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["isolation", "stretch"],
+    tutorialUrl: "https://www.youtube.com/embed/eozdVDA78K0",
   },
   {
     id: "decline-press",
@@ -125,6 +133,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["push", "lower-chest"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   // BACK
   {
@@ -140,6 +149,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["pull", "upper", "lats"],
+    tutorialUrl: "https://www.youtube.com/embed/eGo4IYlbE5g",
   },
   {
     id: "bent-over-row",
@@ -154,6 +164,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 120,
     isCompound: true,
     tags: ["pull", "compound", "strength"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "dumbbell-row",
@@ -168,6 +179,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["pull", "unilateral"],
+    tutorialUrl: "https://www.youtube.com/embed/pYcpY20QaE8",
   },
   {
     id: "lat-pulldown",
@@ -182,6 +194,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["pull", "lats", "machine"],
+    tutorialUrl: "https://www.youtube.com/embed/CAwf7n6Luuc",
   },
   {
     id: "cable-row",
@@ -196,6 +209,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["pull", "mid-back"],
+    tutorialUrl: "https://www.youtube.com/embed/GZbfZ033f74",
   },
   {
     id: "renegade-row",
@@ -210,6 +224,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["pull", "core", "challenging"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "deadlift",
@@ -225,6 +240,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 180,
     isCompound: true,
     tags: ["compound", "strength", "posterior-chain"],
+    tutorialUrl: "https://www.youtube.com/embed/op9kVnSso6Q",
   },
   // SHOULDERS
   {
@@ -240,6 +256,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 120,
     isCompound: true,
     tags: ["push", "compound"],
+    tutorialUrl: "https://www.youtube.com/embed/2yjwXTZQDDI",
   },
   {
     id: "dumbbell-shoulder-press",
@@ -254,6 +271,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["push", "overhead"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "lateral-raise",
@@ -268,6 +286,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["isolation", "side-delts"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "arnold-press",
@@ -282,6 +301,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: false,
     tags: ["push", "all-heads"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "face-pull",
@@ -297,6 +317,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["rear-delts", "health"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "band-pull-apart",
@@ -311,6 +332,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 45,
     isCompound: false,
     tags: ["rear-delts", "posture", "warm-up"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   // BICEPS
   {
@@ -326,6 +348,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["curl", "isolation"],
+    tutorialUrl: "https://www.youtube.com/embed/ykJmrZ5v0Oo",
   },
   {
     id: "hammer-curl",
@@ -340,6 +363,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["curl", "forearms"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   // TRICEPS
   {
@@ -355,6 +379,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["push", "bodyweight"],
+    tutorialUrl: "https://www.youtube.com/embed/0326dy_-CzM",
   },
   {
     id: "skull-crusher",
@@ -369,6 +394,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["isolation", "extension"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "close-grip-bench",
@@ -383,6 +409,22 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["push", "triceps"],
+    tutorialUrl: FALLBACK_TUTORIAL,
+  },
+  {
+    id: "tricep-pushdown",
+    name: "Tricep Pushdown",
+    primaryMuscle: "triceps",
+    equipment: ["cable"],
+    description: "Push cable bar or rope down to full extension at sides.",
+    difficulty: "beginner",
+    defaultSets: 3,
+    defaultReps: 15,
+    defaultWeight: 20,
+    restSeconds: 60,
+    isCompound: false,
+    tags: ["isolation", "cable"],
+    tutorialUrl: "https://www.youtube.com/embed/2-LAMcpzODU",
   },
   // LEGS
   {
@@ -398,6 +440,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 180,
     isCompound: true,
     tags: ["compound", "strength", "quad-dominant"],
+    tutorialUrl: "https://www.youtube.com/embed/ultWZbUMPL8",
   },
   {
     id: "goblet-squat",
@@ -412,6 +455,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["squat", "beginner-friendly"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "lunges",
@@ -426,6 +470,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["unilateral", "balance"],
+    tutorialUrl: "https://www.youtube.com/embed/QOVaHwm-Q6U",
   },
   {
     id: "romanian-deadlift",
@@ -440,6 +485,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 120,
     isCompound: true,
     tags: ["hamstrings", "posterior-chain"],
+    tutorialUrl: "https://www.youtube.com/embed/JCXUYuzwNrM",
   },
   {
     id: "leg-press",
@@ -454,6 +500,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["machine", "quads"],
+    tutorialUrl: "https://www.youtube.com/embed/IZxyjW7MPJQ",
   },
   {
     id: "bulgarian-split-squat",
@@ -468,6 +515,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["unilateral", "advanced", "glutes"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "leg-curl",
@@ -482,6 +530,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["hamstrings", "isolation", "machine"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "leg-extension",
@@ -496,6 +545,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["quads", "isolation", "machine"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "calf-raise",
@@ -510,6 +560,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 45,
     isCompound: false,
     tags: ["calves", "isolation"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "pistol-squat",
@@ -525,6 +576,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["unilateral", "balance", "advanced"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "band-squat",
@@ -539,6 +591,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["bands", "home-workout"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   // GLUTES
   {
@@ -555,6 +608,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["glutes", "hip-extension"],
+    tutorialUrl: "https://www.youtube.com/embed/SEdqd1n0cvg",
   },
   {
     id: "glute-bridge",
@@ -569,6 +623,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 45,
     isCompound: false,
     tags: ["glutes", "beginner-friendly"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "step-ups",
@@ -583,6 +638,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["unilateral", "functional"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   // CORE
   {
@@ -598,6 +654,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 45,
     isCompound: false,
     tags: ["isometric", "stability"],
+    tutorialUrl: "https://www.youtube.com/embed/ASdvN_XEl_c",
   },
   {
     id: "russian-twist",
@@ -612,6 +669,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 45,
     isCompound: false,
     tags: ["obliques", "rotation"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "dead-bug",
@@ -627,6 +685,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 45,
     isCompound: false,
     tags: ["stability", "anti-rotation"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "bird-dog",
@@ -641,6 +700,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 45,
     isCompound: false,
     tags: ["stability", "lower-back"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "superman",
@@ -655,6 +715,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 45,
     isCompound: false,
     tags: ["lower-back", "erectors"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "mountain-climber",
@@ -670,6 +731,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 45,
     isCompound: true,
     tags: ["cardio", "core", "conditioning"],
+    tutorialUrl: "https://www.youtube.com/embed/nmwgirgXLYM",
   },
   {
     id: "wall-sit",
@@ -685,6 +747,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["isometric", "endurance"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   // CARDIO / FULLBODY
   {
@@ -700,6 +763,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["cardio", "conditioning", "fat-loss"],
+    tutorialUrl: "https://www.youtube.com/embed/dZgVxmf6jkA",
   },
   {
     id: "box-jump",
@@ -714,6 +778,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 90,
     isCompound: true,
     tags: ["power", "plyometric"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "kettlebell-swing",
@@ -728,6 +793,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["cardio", "conditioning", "posterior"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "turkish-get-up",
@@ -743,6 +809,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 120,
     isCompound: true,
     tags: ["complex", "stability", "functional"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "kettlebell-goblet-squat",
@@ -757,6 +824,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["squat", "kettlebell"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "jump-rope",
@@ -771,6 +839,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: false,
     tags: ["cardio", "conditioning"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "battle-rope",
@@ -785,6 +854,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["cardio", "upper-body", "conditioning"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "nordic-curl",
@@ -799,6 +869,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 120,
     isCompound: false,
     tags: ["hamstrings", "eccentric", "advanced"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "handstand-pushup",
@@ -814,6 +885,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 120,
     isCompound: true,
     tags: ["calisthenics", "advanced", "overhead"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "trx-row",
@@ -828,6 +900,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["pull", "bodyweight", "functional"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
   {
     id: "band-deadlift",
@@ -843,6 +916,7 @@ export const EXERCISES: ExerciseInfo[] = [
     restSeconds: 60,
     isCompound: true,
     tags: ["bands", "posterior-chain", "home-workout"],
+    tutorialUrl: FALLBACK_TUTORIAL,
   },
 ];
 

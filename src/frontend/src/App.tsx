@@ -12,7 +12,7 @@ import {
   Utensils,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OnboardingModal } from "./components/OnboardingModal";
 import { AppProvider, useApp } from "./context/AppContext";
 import { useNotifications } from "./hooks/useNotifications";
@@ -35,6 +35,14 @@ type SubPage =
   | "aiconfig"
   | null;
 
+const VALID_TABS: Tab[] = [
+  "home",
+  "workouts",
+  "library",
+  "progress",
+  "account",
+];
+
 const TAB_ITEMS: { id: Tab; label: string; Icon: React.FC<any> }[] = [
   { id: "home", label: "Home", Icon: Home },
   { id: "workouts", label: "Workouts", Icon: Dumbbell },
@@ -49,12 +57,44 @@ const BG_MAP: Record<string, string> = {
   "text-red-400": "bg-red-400/10",
 };
 
+function getTabFromHash(): Tab {
+  const hash = window.location.hash.replace("#", "") as Tab;
+  return VALID_TABS.includes(hash) ? hash : "home";
+}
+
 function AppShell() {
   const { state } = useApp();
-  const [activeTab, setActiveTab] = useState<Tab>("home");
+  const [activeTab, setActiveTab] = useState<Tab>(() => getTabFromHash());
   const [subPage, setSubPage] = useState<SubPage>(null);
 
   useNotifications(state.notificationTime);
+
+  // Sync hash to history on mount (in case there's no hash yet)
+  useEffect(() => {
+    const currentTab = getTabFromHash();
+    if (!window.location.hash) {
+      window.history.replaceState({ tab: currentTab }, "", `#${currentTab}`);
+    }
+  }, []);
+
+  // Listen for browser back/forward navigation
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const tab = event.state?.tab as Tab | undefined;
+      if (tab && VALID_TABS.includes(tab)) {
+        setActiveTab(tab);
+        setSubPage(null);
+      } else {
+        // Fallback: read from hash
+        const hashTab = getTabFromHash();
+        setActiveTab(hashTab);
+        setSubPage(null);
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   const showOnboarding =
     !state.isLoading && !state.hasOnboarded && !state.profile;
@@ -73,7 +113,11 @@ function AppShell() {
 
     switch (activeTab) {
       case "home":
-        return <DashboardPage />;
+        return (
+          <DashboardPage
+            onNavigateToWorkouts={() => handleTabChange("workouts", "programs")}
+          />
+        );
       case "library":
         return <LibraryPage />;
       case "progress":
@@ -81,13 +125,24 @@ function AppShell() {
       case "account":
         return <ProfilePage />;
       default:
-        return <DashboardPage />;
+        return (
+          <DashboardPage
+            onNavigateToWorkouts={() => handleTabChange("workouts", "programs")}
+          />
+        );
     }
   };
 
-  const handleTabChange = (tab: Tab) => {
+  const handleTabChange = (tab: Tab, sub?: SubPage) => {
     setActiveTab(tab);
+    setSubPage(sub ?? null);
+    window.history.pushState({ tab }, "", `#${tab}`);
+  };
+
+  const handleSubPageBack = () => {
     setSubPage(null);
+    // Push a workouts state so back button works naturally
+    window.history.pushState({ tab: "workouts" }, "", "#workouts");
   };
 
   return (
@@ -98,7 +153,7 @@ function AppShell() {
           {subPage && activeTab === "workouts" && (
             <button
               type="button"
-              onClick={() => setSubPage(null)}
+              onClick={handleSubPageBack}
               className="p-1.5 rounded-lg hover:bg-muted mr-1"
               data-ocid="nav.secondary_button"
             >

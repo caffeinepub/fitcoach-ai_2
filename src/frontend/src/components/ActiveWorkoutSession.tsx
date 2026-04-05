@@ -2,12 +2,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   CheckCircle2,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
+  ChevronUp,
   Circle,
   Flame,
   Pause,
   Play,
+  PlayCircle,
   RotateCcw,
   X,
 } from "lucide-react";
@@ -69,11 +72,18 @@ export function ActiveWorkoutSession({
   const [startTime] = useState(() => Date.now());
   const [showFeedback, setShowFeedback] = useState(false);
   const [workoutFeedback, setWorkoutFeedback] = useState("right");
+  const [tutorialOpen, setTutorialOpen] = useState(false);
 
   const timer = useRestTimer(exercises[currentExIndex]?.restSeconds || 60);
 
   const currentExercise = exercises[currentExIndex];
   const currentLog = exerciseLogs[currentExIndex];
+
+  // Reset tutorial state when switching exercises
+  const handleExerciseChange = useCallback((index: number) => {
+    setCurrentExIndex(index);
+    setTutorialOpen(false);
+  }, []);
 
   const updateSet = useCallback(
     (setIndex: number, field: keyof SetLog, value: SetLog[keyof SetLog]) => {
@@ -213,7 +223,7 @@ export function ActiveWorkoutSession({
           <button
             type="button"
             key={ex.exerciseInfo.id}
-            onClick={() => setCurrentExIndex(i)}
+            onClick={() => handleExerciseChange(i)}
             className={`flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
               i === currentExIndex
                 ? "bg-teal text-black"
@@ -261,6 +271,58 @@ export function ActiveWorkoutSession({
                   <p className="text-xs text-muted-foreground">sets</p>
                 </div>
               </div>
+            </div>
+
+            {/* Tutorial Section */}
+            <div className="card-surface rounded-2xl mb-4 overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setTutorialOpen((prev) => !prev)}
+                className="w-full flex items-center justify-between p-4 hover:bg-muted/30 transition-colors"
+                data-ocid="workout.toggle"
+              >
+                <div className="flex items-center gap-2">
+                  <PlayCircle className="w-4 h-4 text-teal" />
+                  <span className="text-sm font-semibold text-foreground">
+                    Watch Tutorial
+                  </span>
+                </div>
+                {tutorialOpen ? (
+                  <ChevronUp className="w-4 h-4 text-muted-foreground" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                )}
+              </button>
+              <AnimatePresence>
+                {tutorialOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-4 pb-4">
+                      <div
+                        className="relative w-full rounded-xl overflow-hidden bg-black"
+                        style={{ paddingBottom: "56.25%" }}
+                      >
+                        <iframe
+                          src={`${currentExercise.exerciseInfo.tutorialUrl}?rel=0&modestbranding=1`}
+                          title={`${currentExercise.exerciseInfo.name} tutorial`}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="absolute inset-0 w-full h-full"
+                          loading="lazy"
+                        />
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2 text-center">
+                        Tutorial: {currentExercise.exerciseInfo.name}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Sets */}
@@ -427,7 +489,7 @@ export function ActiveWorkoutSession({
           variant="outline"
           className="flex-1 gap-2"
           disabled={currentExIndex === 0}
-          onClick={() => setCurrentExIndex((i) => i - 1)}
+          onClick={() => handleExerciseChange(currentExIndex - 1)}
           data-ocid="workout.pagination_prev"
         >
           <ChevronLeft className="w-4 h-4" /> Prev
@@ -436,7 +498,7 @@ export function ActiveWorkoutSession({
           variant="outline"
           className="flex-1 gap-2"
           disabled={currentExIndex === exercises.length - 1}
-          onClick={() => setCurrentExIndex((i) => i + 1)}
+          onClick={() => handleExerciseChange(currentExIndex + 1)}
           data-ocid="workout.pagination_next"
         >
           Next <ChevronRight className="w-4 h-4" />
