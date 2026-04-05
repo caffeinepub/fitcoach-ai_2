@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BricolageGrotesque";
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* FitCoach AI Dark Theme - OKLCH values */
+    /* Near-black background #0F0F10 */
+    --background: 0.085 0.003 260;
+    /* Card surface #1B1C1E */
+    --card: 0.135 0.004 260;
+    /* Popover #202124 */
+    --popover: 0.155 0.005 260;
+    /* Off-white text #F2F2F2 */
+    --foreground: 0.955 0 0;
+    --card-foreground: 0.955 0 0;
+    --popover-foreground: 0.955 0 0;
+    /* Teal/mint primary #20E3B2 */
+    --primary: 0.845 0.155 175;
+    --primary-foreground: 0.085 0 0;
+    /* Dark secondary */
+    --secondary: 0.18 0.005 260;
+    --secondary-foreground: 0.955 0 0;
+    /* Muted grays */
+    --muted: 0.22 0.006 260;
+    --muted-foreground: 0.65 0.008 260;
+    /* Yellow accent #F2D34F */
+    --accent: 0.88 0.16 90;
+    --accent-foreground: 0.085 0 0;
+    /* Destructive */
+    --destructive: 0.62 0.22 25;
+    --destructive-foreground: 0.985 0 0;
+    /* Borders */
+    --border: 0.955 0 0 / 6%;
+    --input: 0.955 0 0 / 10%;
+    --ring: 0.845 0.155 175;
+    /* Charts */
+    --chart-1: 0.845 0.155 175;
+    --chart-2: 0.88 0.16 90;
+    --chart-3: 0.62 0.22 25;
+    --chart-4: 0.55 0.18 280;
+    --chart-5: 0.7 0.14 200;
+    /* Sidebar */
+    --sidebar: 0.11 0.004 260;
+    --sidebar-foreground: 0.955 0 0;
+    --sidebar-primary: 0.845 0.155 175;
+    --sidebar-primary-foreground: 0.085 0 0;
+    --sidebar-accent: 0.18 0.005 260;
+    --sidebar-accent-foreground: 0.955 0 0;
+    --sidebar-border: 0.955 0 0 / 6%;
+    --sidebar-ring: 0.845 0.155 175;
+
+    /* Custom fitness app vars */
+    --teal: oklch(0.845 0.155 175);
+    --yellow: oklch(0.88 0.16 90);
+    --card-bg: oklch(0.135 0.004 260);
+    --card-bg-2: oklch(0.155 0.005 260);
+    --track: oklch(0.22 0.006 260);
+  }
+
+  .light {
+    --background: 0.97 0.003 260;
+    --card: 1 0 0;
+    --popover: 1 0 0;
+    --foreground: 0.12 0.005 260;
+    --card-foreground: 0.12 0.005 260;
+    --popover-foreground: 0.12 0.005 260;
+    --primary: 0.72 0.155 175;
+    --primary-foreground: 0.985 0 0;
+    --secondary: 0.93 0.005 260;
+    --secondary-foreground: 0.12 0.005 260;
+    --muted: 0.93 0.005 260;
+    --muted-foreground: 0.45 0.008 260;
+    --accent: 0.82 0.16 90;
+    --accent-foreground: 0.085 0 0;
+    --destructive: 0.577 0.245 27;
+    --destructive-foreground: 0.985 0 0;
+    --border: 0.12 0 0 / 12%;
+    --input: 0.12 0 0 / 12%;
+    --ring: 0.72 0.155 175;
+    --chart-1: 0.72 0.155 175;
+    --chart-2: 0.82 0.16 90;
+    --chart-3: 0.62 0.22 25;
+    --chart-4: 0.55 0.18 280;
+    --chart-5: 0.6 0.14 200;
+    --sidebar: 0.95 0.003 260;
+    --sidebar-foreground: 0.12 0.005 260;
+    --sidebar-primary: 0.72 0.155 175;
+    --sidebar-primary-foreground: 0.985 0 0;
+    --sidebar-accent: 0.9 0.005 260;
+    --sidebar-accent-foreground: 0.12 0.005 260;
+    --sidebar-border: 0.12 0 0 / 12%;
+    --sidebar-ring: 0.72 0.155 175;
+    --teal: oklch(0.72 0.155 175);
+    --yellow: oklch(0.82 0.16 90);
+    --card-bg: oklch(1 0 0);
+    --card-bg-2: oklch(0.97 0.003 260);
+    --track: oklch(0.88 0.005 260);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.3 0.005 260);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.4 0.005 260);
+  }
+}
+
+@layer utilities {
+  .teal-glow {
+    box-shadow: 0 0 20px oklch(0.845 0.155 175 / 0.25), 0 0 40px
+      oklch(0.845 0.155 175 / 0.1);
+  }
+  .teal-glow-sm {
+    box-shadow: 0 0 10px oklch(0.845 0.155 175 / 0.3);
+  }
+  .card-surface {
+    background: var(--card-bg);
+    border: 1px solid oklch(1 0 0 / 0.05);
+  }
+  .card-surface-2 {
+    background: var(--card-bg-2);
+    border: 1px solid oklch(1 0 0 / 0.05);
+  }
+  .text-teal {
+    color: var(--teal);
+  }
+  .text-yellow {
+    color: var(--yellow);
+  }
+  .bg-teal {
+    background-color: var(--teal);
+  }
+  .bg-yellow {
+    background-color: var(--yellow);
+  }
+  .border-teal {
+    border-color: var(--teal);
+  }
+  .gradient-teal {
+    background: linear-gradient(
+      135deg,
+      oklch(0.845 0.155 175),
+      oklch(0.72 0.155 195)
+    );
+  }
+  .gradient-hero {
+    background: linear-gradient(
+      135deg,
+      oklch(0.72 0.155 195 / 0.9),
+      oklch(0.845 0.155 175 / 0.8)
+    );
+  }
+  .tab-nav-height {
+    height: 64px;
+  }
+  .pb-tab {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Transition for theme */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+/* Override for animations */
+.no-transition * {
+  transition: none !important;
+}
